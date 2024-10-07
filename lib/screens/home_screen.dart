@@ -171,7 +171,84 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            )
+            ),
+            const SizedBox(height: 10),
+            CarouselSlider(
+              options: CarouselOptions(
+                height: 100.0,
+                autoPlay: true,
+                enlargeCenterPage: true,
+                aspectRatio: 16 / 9,
+                autoPlayInterval: const Duration(seconds: 3),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                autoPlayCurve: Curves.fastOutSlowIn,
+                enableInfiniteScroll: true,
+                viewportFraction: 0.33,
+              ),
+              items: [
+                'https://asianwiki.com/images/c/c8/Itaewon_Class-mp1.jpg',
+                'https://post.app/wp-content/uploads/2020/11/BLOG_POST_START-UP-K-DRAMA_23-11-2020.jpg',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx6vWxuYRFLTd-gAENuvGHvkWzBUShUEYYLw&s',
+                'https://kenh14cdn.com/203336854389633024/2024/4/8/photo-6-1712588555433325474239.jpg',
+                'https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/127/2023/11/06/FotoJet91-3519685924.jpg'
+              ].map((i) {
+                return Builder(
+                  builder: (BuildContext context) {
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.network(
+                        i,
+                        width: 350,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
+                    );
+                  },
+                );
+              }).toList(),
+            ),
+            // SINETRON INDO
+            const Padding(
+              padding: EdgeInsets.only(top: 10, left: 10),
+              child: Text(
+                "Sinetron Indonesia",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              // Gunakan Expanded agar ListView dapat menyesuaikan tinggi
+              child: ListView.builder(
+                scrollDirection: Axis.vertical, // Scroll vertikal
+                itemCount: 5, // Jumlah 
+                itemBuilder: (context, index) {
+                  List<String> imageUrls = [
+                    'https://asianwiki.com/images/c/c8/Itaewon_Class-mp1.jpg',
+                    'https://post.app/wp-content/uploads/2020/11/BLOG_POST_START-UP-K-DRAMA_23-11-2020.jpg',
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx6vWxuYRFLTd-gAENuvGHvkWzBUShUEYYLw&s',
+                    'https://kenh14cdn.com/203336854389633024/2024/4/8/photo-6-1712588555433325474239.jpg',
+                    'https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/127/2023/11/06/FotoJet91-3519685924.jpg'
+                  ];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0), // Tambahkan padding antar item
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.network(
+                        imageUrls[index],
+                        width: 350,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
