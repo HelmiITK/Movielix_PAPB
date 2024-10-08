@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movielixfix/screens/detail_film_screen.dart';
 import 'package:movielixfix/screens/home_screen.dart';
 import 'package:movielixfix/screens/login_screen.dart';
 import 'package:movielixfix/screens/login_with_google_screen.dart';
+import 'package:movielixfix/screens/profile_screen.dart';
 import 'package:movielixfix/screens/register_screen.dart';
+import 'package:movielixfix/screens/wishlist_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +27,9 @@ class MyApp extends StatelessWidget {
         '/register': (context) => const Register(),
         '/login_account': (context) => const Login(),
         '/home': (context) => const HomeScreen(),
+        '/detail_film': (context) => const DetailFilm(),
+        '/wishlist': (context) => const Wishlist(),
+        '/profile': (context) => const Profile(),
       },
     );
   }
