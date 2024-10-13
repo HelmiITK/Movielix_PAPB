@@ -33,6 +33,8 @@ class _ProfileState extends State<Profile> {
 
   bool _obscurePassword = true; // Password disembunyikan secara default
 
+  bool setUser = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +57,8 @@ class _ProfileState extends State<Profile> {
               const SizedBox(height: 20),
               // Card Profile
               _buildProfileCard(),
+              const SizedBox(height: 10),
+              
             ],
           ),
         ),
