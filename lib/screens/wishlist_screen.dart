@@ -176,7 +176,7 @@ class _WishlistState extends State<Wishlist> {
                                                   context); // Tutup dialog sebelum berpindah halaman
                                               Navigator.pushNamed(
                                                 context,
-                                                '/detail_film',
+                                                '/detail_movie',
                                                 arguments:
                                                     movie, // Mengirim data movie ke halaman detail
                                               );

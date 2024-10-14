@@ -57,8 +57,33 @@ class _ProfileState extends State<Profile> {
               const SizedBox(height: 20),
               // Card Profile
               _buildProfileCard(),
-              const SizedBox(height: 10),
-              
+              const SizedBox(height: 40),
+              // button logout
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                ),
+                label: Text(
+                  'Logout',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 255, 17, 0),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 20,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

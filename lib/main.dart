@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => const Register(),
         '/login_account': (context) => const Login(),
         '/home': (context) => const HomeScreen(),
-        '/detail_film': (context) => const DetailFilm(),
+        '/detail_movie': (context) => const DetailMovie(),
         '/wishlist': (context) => const Wishlist(),
         '/profile': (context) => const Profile(),
       },
