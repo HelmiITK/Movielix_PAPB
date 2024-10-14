@@ -340,7 +340,13 @@ class _DetailMovieState extends State<DetailMovie> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/trailer_movie',
+                    arguments: castData,
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 255, 17, 0),
                   padding: const EdgeInsets.symmetric(

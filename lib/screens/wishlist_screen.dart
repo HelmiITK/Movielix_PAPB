@@ -244,7 +244,7 @@ class _WishlistState extends State<Wishlist> {
                                   // Navigasi ke halaman 'Watch' dengan parameter
                                   Navigator.pushNamed(
                                     context,
-                                    '/watch',
+                                    '/trailer_movie',
                                     arguments: movie,
                                   );
                                 },

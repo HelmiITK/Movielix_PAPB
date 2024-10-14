@@ -5,6 +5,7 @@ import 'package:movielixfix/screens/login_screen.dart';
 import 'package:movielixfix/screens/login_with_google_screen.dart';
 import 'package:movielixfix/screens/profile_screen.dart';
 import 'package:movielixfix/screens/register_screen.dart';
+import 'package:movielixfix/screens/trailer_movie_screen.dart';
 import 'package:movielixfix/screens/wishlist_screen.dart';
 
 void main() {
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/detail_movie': (context) => const DetailMovie(),
         '/wishlist': (context) => const Wishlist(),
         '/profile': (context) => const Profile(),
+        '/trailer_movie': (context) => const TrailerMovie(),
       },
     );
   }
