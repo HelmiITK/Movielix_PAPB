@@ -42,7 +42,7 @@ class _RegisterState extends State<Register> {
                 Navigator.pushNamed(context, '/login');
               },
               style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(
+                backgroundColor: WidgetStatePropertyAll(
                   Color.fromARGB(255, 0, 0, 0),
                 ),
               ),

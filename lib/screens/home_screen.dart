@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movielixfix/components/custom_app_bar_widget.dart';
-import 'package:movielixfix/components/bottom_navigation_bar_widget.dart';
+import 'package:movielix/components/custom_app_bar_widget.dart';
+import 'package:movielix/components/bottom_navigation_bar_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -117,35 +117,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 10),
 
-              // Button Filter by Genre
-              Padding(
-                padding: const EdgeInsets.only(top: 10, left: 10),
-                child: Text(
-                  "Genre",
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              const SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    GenreButton(label: "Horror"),
-                    GenreButton(label: "Action"),
-                    GenreButton(label: "Romance"),
-                    GenreButton(label: "Thriller"),
-                    GenreButton(label: "Comedy"),
-                    GenreButton(label: "Fantasy"),
-                    GenreButton(label: "Advanture"),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-
               // Korean TV Drama
               Padding(
                 padding: const EdgeInsets.only(top: 10, left: 10),
@@ -159,6 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 10),
+
               CarouselSlider(
                 options: CarouselOptions(
                   height: 100.0,
@@ -195,7 +167,36 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 10),
 
-              // Menampilkan berdasarkan opsi genre yang dipilih nantinya
+// Button Filter by Genre
+              Padding(
+                padding: const EdgeInsets.only(top: 10, left: 10),
+                child: Text(
+                  "Genre",
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    GenreButton(label: "Horror"),
+                    GenreButton(label: "Action"),
+                    GenreButton(label: "Romance"),
+                    GenreButton(label: "Thriller"),
+                    GenreButton(label: "Comedy"),
+                    GenreButton(label: "Fantasy"),
+                    GenreButton(label: "Advanture"),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              // Menampilkan berdasarkan opsi genre yang akan dipilih
               Padding(
                 padding: const EdgeInsets.only(top: 10, left: 10),
                 child: Text(

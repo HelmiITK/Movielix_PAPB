@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
                 Navigator.pushNamed(context, '/login');
               },
               style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(
+                backgroundColor: WidgetStatePropertyAll(
                   Color.fromARGB(255, 0, 0, 0),
                 ),
               ),

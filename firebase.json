@@ -1,0 +1,25 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "movielix-5b9a2",
+          "appId": "1:550034973964:android:964b231e721c4999609529",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "movielix-5b9a2",
+          "configurations": {
+            "android": "1:550034973964:android:964b231e721c4999609529",
+            "ios": "1:550034973964:ios:a87aad5b653f0956609529",
+            "macos": "1:550034973964:ios:a87aad5b653f0956609529",
+            "web": "1:550034973964:web:0bfd741039cd7f3d609529",
+            "windows": "1:550034973964:web:9e1e07dc2bea6e88609529"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movielixfix/components/bottom_navigation_bar_widget.dart';
-import 'package:movielixfix/components/custom_app_bar_widget.dart';
+import 'package:movielix/components/bottom_navigation_bar_widget.dart';
+import 'package:movielix/components/custom_app_bar_widget.dart';
 
 class Wishlist extends StatefulWidget {
   const Wishlist({super.key});
