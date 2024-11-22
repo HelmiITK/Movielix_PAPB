@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movielix/provider/auth_provider.dart';
+import 'package:movielix/screens/login_screen.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -9,12 +13,28 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final _auth = AuthProvider();
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
+  // void goToLogin(BuildContext context) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => const Login()),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -186,53 +206,11 @@ class _RegisterState extends State<Register> {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 16),
-
-                        // Confirm Password Field
-                        TextFormField(
-                          controller: _confirmPasswordController,
-                          obscureText: true,
-                          style: const TextStyle(color: Colors.white),
-                          decoration: const InputDecoration(
-                            labelText: 'Confirm Password',
-                            labelStyle: TextStyle(color: Colors.white),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.redAccent),
-                              borderRadius: BorderRadius.horizontal(
-                                left: Radius.circular(12),
-                                right: Radius.circular(12),
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blue),
-                              borderRadius: BorderRadius.horizontal(
-                                left: Radius.circular(12),
-                                right: Radius.circular(12),
-                              ),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please confirm your password';
-                            } else if (value != _passwordController.text) {
-                              return 'Passwords do not match';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 22),
 
                         // Register Button
                         ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              // If the form is valid, perform registration logic
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Registration Successful')),
-                              );
-                            }
-                          },
+                          onPressed: _signup,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red[900],
                             padding: const EdgeInsets.symmetric(
@@ -247,6 +225,28 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 16),
+
+                        // Login Navigation
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Already have an account?",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            InkWell(
+                              onTap: () => goToLogin(context),
+                              child: const Text(
+                                "Login",
+                                style: TextStyle(
+                                  color: Colors.redAccent,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -257,5 +257,31 @@ class _RegisterState extends State<Register> {
         ],
       ),
     );
+  }
+
+  goToLogin(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Login()),
+    );
+  }
+
+  // goToHome(BuildContext context) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => const HomeScreen()),
+  //   );
+  // }
+
+  _signup() async {
+    final user = await _auth.createUserWithEmailAndPassword(
+      _emailController.text,
+      _passwordController.text,
+      _nameController.text,
+    );
+    if (user != null) {
+      log("User Creadted Succesfully id: ${user.uid}");
+      goToLogin(context);
+    }
   }
 }

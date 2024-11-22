@@ -1,5 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movielix/provider/auth_provider.dart';
+import 'package:movielix/screens/home_screen.dart';
+import 'package:movielix/screens/register_screen.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -9,9 +14,19 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final _auth = AuthProvider();
+
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,15 +171,7 @@ class _LoginState extends State<Login> {
 
                         // Login Button
                         ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              // If the form is valid, perform registration logic
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Login Successful')),
-                              );
-                            }
-                          },
+                          onPressed: _login,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red[900],
                             padding: const EdgeInsets.symmetric(
@@ -181,7 +188,28 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 16)
+                        const SizedBox(height: 16),
+
+                        //Signup navigation
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Dont have an account?",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            InkWell(
+                              onTap: () => goToSignup(context),
+                              child: const Text(
+                                "Signup",
+                                style: TextStyle(
+                                  color: Colors.redAccent,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -192,5 +220,31 @@ class _LoginState extends State<Login> {
         ],
       ),
     );
+  }
+
+  goToSignup(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Register()),
+    );
+  }
+
+  goToHome(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const HomeScreen()),
+    );
+  }
+
+  _login() async {
+    final user = await _auth.loginUserWithEmailAndPassword(
+      _emailController.text,
+      _passwordController.text,
+    );
+    if (user != null) {
+      log("User Logged in: id [ ${user.uid} ]");
+      log("User Logged in: username [ ${user.displayName} ]");
+      goToHome(context);
+    }
   }
 }

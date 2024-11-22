@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movielix/components/custom_app_bar_widget.dart';
 import 'package:movielix/components/bottom_navigation_bar_widget.dart';
+import 'package:movielix/provider/auth_provider.dart';
+import 'package:movielix/screens/login_with_google_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -11,6 +14,9 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final _auth = AuthProvider();
+  auth.User? _user;
+
   int _selectedIndex = 2;
 
   void _onTap(int index) {
@@ -32,11 +38,25 @@ class _ProfileState extends State<Profile> {
   }
 
   bool _obscurePassword = true; // Password disembunyikan secara default
-
   bool setUser = false;
+
+  // Get User from firebase
+  @override
+  void initState() {
+    super.initState();
+    _loadUser();
+  }
+
+  void _loadUser() async {
+    final user = await _auth.getMe();
+    setState(() {
+      _user = user;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    // final _auth = AuthProvider();
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: const CustomAppBar(),
@@ -55,12 +75,14 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               const SizedBox(height: 20),
+
               // Card Profile
               _buildProfileCard(),
               const SizedBox(height: 40),
+
               // button logout
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: _logout,
                 icon: const Icon(
                   Icons.logout,
                   color: Colors.white,
@@ -93,6 +115,18 @@ class _ProfileState extends State<Profile> {
         onTap: _onTap,
       ),
     );
+  }
+
+  goToLogin(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginWithGoogle()),
+    );
+  }
+
+  _logout() async {
+    await _auth.signout();
+    goToLogin(context);
   }
 
   Widget _buildProfileCard() {
@@ -138,7 +172,7 @@ class _ProfileState extends State<Profile> {
               ),
               const SizedBox(height: 8),
               Text(
-                'Helmi A',
+                _user?.displayName ?? 'Name is notfound',
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 16,
@@ -165,7 +199,7 @@ class _ProfileState extends State<Profile> {
               ),
               const SizedBox(height: 8),
               Text(
-                'helmi@gmail.com',
+                _user?.email ?? 'Email is notfound',
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 16,
